@@ -74,7 +74,6 @@ const MySidebar = ({ children }: MyComponentProps) => {
         <Content
           style={{
             margin: '5px 5px',
-            padding: 24,
             minHeight: 280,
             background: colorBgContainer,
             borderRadius: borderRadiusLG,
