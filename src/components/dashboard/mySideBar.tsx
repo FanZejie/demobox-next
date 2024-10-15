@@ -1,5 +1,6 @@
 'use client'
-import React, { useState,ReactNode } from 'react';
+import React, { useState, ReactNode } from 'react';
+import { useRouter } from "next/navigation";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -8,40 +9,51 @@ import {
   VideoCameraOutlined,
 } from '@ant-design/icons';
 import { Button, Layout, Menu, theme } from 'antd';
-
+import type { MenuProps } from 'antd';
 const { Header, Sider, Content } = Layout;
 
 interface MyComponentProps {
-    children: ReactNode;
-  }
+  children: ReactNode;
+}
 
-const MySidebar = ({children}: MyComponentProps) => {
+const menuItem = [
+  {
+    key: 'healthCheck',
+    icon: <UserOutlined />,
+    label: 'Health Check',
+  },
+  {
+    key: 'appTopo',
+    icon: <VideoCameraOutlined />,
+    label: 'App Topo',
+  },
+]
+
+const MySidebar = ({ children }: MyComponentProps) => {
+  const router = useRouter();
   const [collapsed, setCollapsed] = useState(false);
+  const [current, setCurrent] = useState('appTopo');
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
+  const menuItemClick: MenuProps['onClick'] = (e) => {
+
+    setCurrent(e.key);
+    router.push(e.key)
+  };
+
   return (
     <Layout className='h-screen'>
       <Sider trigger={null} collapsible collapsed={collapsed}>
-        {collapsed ?<div className=' text-white text-center py-4'>Demo Box</div> :<div className=' text-white text-2xl text-center py-4'>Demo Box</div>}
-        
+        {collapsed ? <div className=' text-white text-center py-4'>Demo Box</div> : <div className=' text-white text-2xl text-center py-4'>Demo Box</div>}
+
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={['1']}
-          items={[
-            {
-              key: '1',
-              icon: <UserOutlined />,
-              label: 'Health Check',
-            },
-            {
-              key: '2',
-              icon: <VideoCameraOutlined />,
-              label: 'App Topo',
-            },
-          ]}
+          selectedKeys={[current]}
+          onClick={menuItemClick}
+          items={menuItem}
         />
       </Sider>
       <Layout>
