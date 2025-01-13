@@ -1,20 +1,28 @@
 
 
-var minSubArrayLen = function(target, nums) {
-    const len = nums.length
-    let left = 0
-    let ans = len+1
-    let sum = 0
-    
-    for(let right = 0; right < len;right++){
-        sum += nums[right]
-        while(sum >= target){
-            ans = Math.min(ans,right - left + 1)
-            sum -= nums[left++]
+var spiralOrder = function(matrix) {
+    let top=0,bottom=matrix.length-1,left=0,right=matrix[0].length-1
+    let res = []
+    while(top<=bottom && left <= right){
+        for(let i=left;i<=right;i++){
+            res.push(matrix[top][i])
         }
+        top++
+        for(let i=top;i<=bottom;i++){
+            res.push(matrix[i][right])
+        }
+        right--
+        if(top > bottom || left > right) break
+        for(let i=right;i>=left;i--){
+            res.push(matrix[bottom][i])
+        }
+        bottom--
+        for(let i=bottom;i>=top;i--){
+            res.push(matrix[i][left])
+        }
+        left++
     }
-    return ans <= len ? ans : 0
+    return res
 };
 
-
-console.log(minSubArrayLen(7,[2,3,1,2,4,3]))
+console.log(spiralOrder([[1,2,3,4],[5,6,7,8],[9,10,11,12]]))

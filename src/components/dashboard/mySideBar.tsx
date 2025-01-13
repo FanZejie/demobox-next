@@ -1,12 +1,13 @@
 'use client'
 import React, { useState, ReactNode } from 'react';
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   UploadOutlined,
   UserOutlined,
   VideoCameraOutlined,
+  MobileOutlined
 } from '@ant-design/icons';
 import { Button, Layout, Menu, theme } from 'antd';
 import type { MenuProps } from 'antd';
@@ -16,32 +17,41 @@ interface MyComponentProps {
   children: ReactNode;
 }
 
-const menuItem = [
-  {
-    key: 'healthCheck',
-    icon: <UserOutlined />,
-    label: 'Health Check',
-  },
-  {
-    key: 'appTopo',
-    icon: <VideoCameraOutlined />,
-    label: 'App Topo',
-  },
-]
+
 
 const MySidebar = ({ children }: MyComponentProps) => {
   const router = useRouter();
   const [collapsed, setCollapsed] = useState(false);
-  const [current, setCurrent] = useState('appTopo');
+  const [current, setCurrent] = useState('/dashboard/appTopo');
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+
+  
 
   const menuItemClick: MenuProps['onClick'] = (e) => {
 
     setCurrent(e.key);
     router.push(e.key)
   };
+
+  const menuItem = [
+    {
+      key: '/dashboard/healthCheck',
+      icon: <UserOutlined />,
+      label: 'Health Check',
+    },
+    {
+      key: '/dashboard/appTopo',
+      icon: <VideoCameraOutlined />,
+      label: 'App Topo',
+    },
+    {
+      key: '/dashboard/mobile',
+      icon: <MobileOutlined />,  // 需要先导入这个图标
+      label: 'Mobile Demo',
+    },
+  ]
 
   return (
     <Layout className='h-screen'>

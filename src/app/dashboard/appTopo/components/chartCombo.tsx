@@ -25,7 +25,7 @@ const ChartCombo: React.FC<EChartDemoProps> = ({ className, title, subtitle }) =
   const chartRef = useRef<HTMLDivElement | null>(null);
   //造假数据
   const currentTime = Date.now();
-  const startTime = currentTime - 30 * 60 * 1000; // 半小时之前的时间戳
+  const startTime = currentTime ; // 半小时之前的时间戳
   const data1 = generateRandomData(startTime, 30); // 生成 dataset1
   const data2 = generateRandomData(startTime, 30); // 生成 dataset2
   // 设置图表的选项

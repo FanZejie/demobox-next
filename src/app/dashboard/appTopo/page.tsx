@@ -1,5 +1,5 @@
 import ChartCombo from "./components/chartCombo";
-import TreeGraphComponent from "./components/TreeGraphComponent";
+import TreeGraphComponent from "./components/TreeGraphComponent.jsx";
 
 
 const Page = () => {
@@ -22,7 +22,7 @@ const Page = () => {
         <div style={{ height: 'calc(100vh - 270px)' }}  className="bottom-left w-3/5 bg-slate-100 mt-[-120px] rounded-lg">
           <TreeGraphComponent></TreeGraphComponent>
         </div>
-        <div style={{ height: 'calc(100vh - 270px)' }} className="bottom-right w-2/5  bg-green-300 mt-[-120px] rounded-lg"></div>
+        <div style={{ height: 'calc(100vh - 270px)' }} className="bottom-right w-2/5  bg-slate-300 mt-[-120px] rounded-lg"></div>
 
       </div>
     </div>
